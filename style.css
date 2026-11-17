@@ -1,0 +1,184 @@
+/* Colours, fonts and edge spacing: each defined once, used everywhere */
+:root {
+  --bg: #FAF7F0;
+  --surface: #FFFFFF;
+  --text: #1F2A24;
+  --text-soft: #4A5750;
+  --line: #D9D4C7;
+  --accent: #2F6B3F;
+  --accent-dark: #234F30;
+  --font-head: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --edge: 24px;
+}
+
+/* Base element styles: page, text, headings and links */
+* { box-sizing: border-box; }
+html { scroll-padding-top: 96px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 600; line-height: 1.15; }
+h2 { font-size: 2rem; margin: 0 0 8px; }
+h3 { font-size: 1.25rem; margin: 0 0 8px; }
+p { max-width: 68ch; margin: 0 0 16px; }
+ul { margin: 0; padding: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--accent-dark); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* .container: centres content and keeps it off the screen edge */
+.container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+}
+section.container { padding-top: 64px; padding-bottom: 64px; }
+
+/* Navigation bar: flexbox, stays at the top while scrolling */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.brand {
+  font-family: var(--font-head);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links { display: flex; flex-wrap: wrap; gap: 0 8px; list-style: none; }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* Buttons: used for every call to action */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+a.button-primary, a.button-primary:hover { color: #FFFFFF; }
+a.button-primary { background: var(--accent); }
+a.button-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+a.button-outline { background: transparent; color: var(--accent); }
+a.button-outline:hover { background: var(--accent); color: #FFFFFF; }
+.actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+
+/* #hero: name, one sentence, two buttons and the product photo */
+#hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0 0 8px; }
+.role { color: var(--text-soft); margin-bottom: 24px; }
+.intro { font-size: 1.25rem; }
+.hero-image {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+/* #mirai: four flat cards in a responsive grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+.card p { margin: 0; }
+
+/* #education and #skills: plain lists, grouped by spacing */
+.entries { list-style: none; }
+.entry { display: grid; grid-template-columns: 180px 1fr; gap: 24px; margin-bottom: 16px; }
+.skill-list { list-style: none; max-width: 68ch; }
+.skill-list li { margin-bottom: 16px; }
+
+/* #resume: white one-page sheet, shown on screen and printed alone */
+.resume-wrap { padding-bottom: 64px; }
+#resume {
+  max-width: 794px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 48px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.resume-name { font-size: 1.75rem; margin: 0 0 8px; }
+#resume h4 { font-size: 1.1rem; margin: 24px 0 8px; }
+#resume p { margin-bottom: 8px; }
+#resume ul { padding-left: 20px; }
+#resume li { margin-bottom: 4px; }
+
+/* #contact and footer */
+#contact { padding-bottom: 64px; }
+.site-footer { padding-top: 24px; padding-bottom: 40px; color: var(--text-soft); }
+.site-footer p { margin: 0; }
+
+/* Page size for printing the resume */
+@page { size: A4; margin: 14mm; }
+
+/* Phones: one column, smaller edges, menu no longer sticks */
+@media (max-width: 700px) {
+  :root { --edge: 16px; }
+  .site-header { position: static; }
+  #hero, .entry { grid-template-columns: 1fr; gap: 8px; }
+  #hero { gap: 24px; }
+  section.container { padding-top: 40px; padding-bottom: 40px; }
+  #resume { padding: 24px; }
+}
+
+/* Print: only #resume, black text on white, one A4 page */
+@media print {
+  .site-header, .site-footer, #hero, #mirai, #education, #skills, #contact, .resume-intro { display: none; }
+  body { background: #FFFFFF; color: #000000; font-size: 10.5pt; }
+  .resume-wrap { padding: 0; max-width: none; }
+  #resume { max-width: none; border: 0; padding: 0; font-size: 10.5pt; }
+  #resume a { color: #000000; text-decoration: none; }
+}
+
+/* Turn off colour fades for people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav-link, .button { transition: none; }
+}
